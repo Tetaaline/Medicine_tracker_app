@@ -1,0 +1,12 @@
+{
+  "medicines": [
+    {
+      "patient_id": "P1763551317",
+      "name": "Paracet",
+      "dosage": "300mg",
+      "quantity": "10",
+      "expiry_date": "2026-01-01",
+      "added_by": "honnete",
+      "added_at": "2025-11-19 13:28:46"
+    },
+    
