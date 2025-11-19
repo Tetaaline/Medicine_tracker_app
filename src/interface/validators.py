@@ -19,3 +19,16 @@ def is_valid_time_hms(text: str) -> bool:
     except ValueError:
         return False
 
+def normalize_days(days_list):
+    out = []
+    for d in days_list:
+        d = d.strip().title()[:3]
+        if d in VALID_DAYS:
+            out.append(d)
+    seen = set()
+    res = []
+    for d in out:
+        if d not in seen:
+            seen.add(d); res.append(d)
+    return res
+
