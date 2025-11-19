@@ -178,11 +178,11 @@ def delete_patient(doctor_username, patient_id):
 def get_patient_by_id(pid):
     return _repo.get_patient_by_id(pid)
 
-
+#Created link_patient_user method
 def link_patient_user(pid, username):
     return _repo.link_patient_user(pid, username)
 
-
+# Additng get_patient_id_for_user method
 def get_patient_id_for_user(username):
     return _repo.get_patient_id_for_user(username)
 
