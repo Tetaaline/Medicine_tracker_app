@@ -9,4 +9,14 @@
       "added_by": "honnete",
       "added_at": "2025-11-19 13:28:46"
     },
-    
+    {
+      "patient_id": "P1763551352",
+      "name": "Doliprame",
+      "dosage": "400mg",
+      "quantity": "12",
+      "expiry_date": "2026/05/05",
+      "added_by": "honnete",
+      "added_at": "2025-11-19 19:42:18"
+    }
+  ]
+}
