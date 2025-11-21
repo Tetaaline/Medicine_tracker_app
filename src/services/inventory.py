@@ -30,8 +30,7 @@ class JSONStorageBase:
         with open(self.file_path, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=2)
 
-
-class MedicineInventory(JSONStorageBase):
+v]class MedicineInventory(JSONStorageBase):
     
     # Medicine-specific storage logic. Inherits file operations from JSONStorageBase\ 
     # and exposes the same behavior/logic as the original procedural module.
@@ -123,4 +122,5 @@ def edit_medicine(patient_id, index, name, dosage, quantity, expiry_date):
 
 def delete_medicine(patient_id, index):
     return _inventory.delete_medicine(patient_id, index)
+
 
