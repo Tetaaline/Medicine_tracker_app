@@ -124,39 +124,3 @@ class ScheduleManager(JSONStorageBase):
             pass
 
 
-# instantiate manager and expose original module-level API for backward compatibility
-_scheduler = ScheduleManager(SCH_FILE)
-
-
-def _ensure():
-    return _scheduler._ensure()
-
-
-def _load():
-    return _scheduler._load()
-
-
-def _save(data):
-    return _scheduler._save(data)
-
-#Adding reminder method for patient's id, dosage, medicine_name. daya, and create_by
-def add_reminder(patient_id, medicine_name, dosage, time_hms, days, created_by):
-    return _scheduler.add_reminder(patient_id, medicine_name, dosage, time_hms, days, created_by)
-
-#Adding list_reminder
-def list_reminders(patient_id):
-    return _scheduler.list_reminders(patient_id)
-
-#Adding edit_reminder method
-def edit_reminder(patient_id, index, medicine_name, dosage, time_hms, days):
-    return _scheduler.edit_reminder(patient_id, index, medicine_name, dosage, time_hms, days)
-
-# Creation of due_reminder method
-def due_reminders_for_patient(patient_id, now=None):
-    return _scheduler.due_reminders_for_patient(patient_id, now=now)
-
-#Creation patient_notification_daemon
-
-def patient_notification_daemon(patient_id, interval_seconds=10):
-    return _scheduler.patient_notification_daemon(patient_id, interval_seconds=interval_seconds)
-
