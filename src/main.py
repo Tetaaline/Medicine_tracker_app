@@ -31,9 +31,11 @@ class MediTrackerApp:
         self.CURRENT_ROLE = "neutral"
 
     def clear_screen(self):
+#This will clear the terminal screen for cleaner UI
         os.system('cls' if os.name == 'nt' else 'clear')
 
     def pause(self):
+#The command will put standard pause after actions
         input("\nPress Enter to continue...")
 
     def get_input(self, prompt, min_len=1):
@@ -43,8 +45,10 @@ class MediTrackerApp:
         elif self.CURRENT_ROLE == "patient":
             prompt = Back.RESET + Fore.CYAN + prompt + Style.RESET_ALL
         else:
-            # Neutral / admin / main menu style
+            # Neutral / admin look
             prompt = Fore.LIGHTCYAN_EX + prompt + Style.RESET_ALL
+
+#It will force  to enter minimum input length
         while True:
             v = input(prompt).strip()
             if len(v) >= min_len:
@@ -113,6 +117,7 @@ class MediTrackerApp:
         if not pats:
             print("No patients yet.")
             return None, []
+#Will show numbered list
         for i, p in enumerate(pats, start=1):
             print(f"[{i}] {p['name']} (ID: {p['id']})  Linked Full Name: {p.get('user_username','-')}")
         try:
@@ -138,7 +143,7 @@ class MediTrackerApp:
             print(Fore.LIGHTBLUE_EX+"7." +Style.RESET_ALL + "Search/Filter (Patients & Medicines)")
             print(Fore.LIGHTBLUE_EX+"8." +Style.RESET_ALL + " Logout")
             choice = self.get_input("Choose option (1-8): ", 1)
-
+#This enable the doctor to have choices and have options in order to select what he/she wants to do
             if choice == "1":
                 pname = self.get_input("Patient FULL NAME (letters only): ", 2)
                 if not is_letters_only(pname):
