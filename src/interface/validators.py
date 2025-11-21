@@ -1,14 +1,15 @@
+#This file is for error handling and validating if the user input is true.
 import re
 from datetime import datetime
 
 VALID_DAYS = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"]
-
+#Function to validate if the input is only letters
 def is_letters_only(text: str) -> bool:
     return bool(re.fullmatch(r"[A-Za-z ]+", text))
-
+#The username should be only letter and number(Function o validate it)
 def is_alnum_username(text: str) -> bool:
     return bool(re.fullmatch(r"[A-Za-z0-9]+", text))
-
+#Checks if the dosage is in (value mg,g or l) format
 def is_valid_dosage(text: str) -> bool:
     return bool(re.fullmatch(r"\d+(\.\d+)?\s?(mg|g|l)", text, flags=re.IGNORECASE))
 
