@@ -55,6 +55,7 @@ class MediTrackerApp:
     def doctor_signup(self):
         self.clear_screen()
         print_header("Doctor Sign Up")
+#This is for username creation
         username = self.get_input("Create username (letters & numbers only): ", 3)
         if not is_alnum_username(username):
             print(Fore.LIGHTRED_EX + "Please enter letters and characters only " + Style.RESET_ALL)
@@ -62,9 +63,14 @@ class MediTrackerApp:
         if user_exists(username):
             print(Fore.LIGHTRED_EX + "Username already exists!" + Style.RESET_ALL)
             return None
+
+#This is for email and organisation creating
         email = self.get_input("Email: ")
         org = self.get_input("Organization name: ", 2)
+
+#This is for password creation
         pwd = self.get_input("Create password (min 8 chars): ", 8)
+#This will help to save an account for a new doctor
         save_user(username, pwd, username, email, role="doctor", org=org)
         print(f"\nWelcome Dr. {username}! Account created successfully.") 
         return {"username": username, "name": username, "role":"doctor", "org": org}
@@ -73,13 +79,15 @@ class MediTrackerApp:
         self.clear_screen()
         print_header(f"{role_label.title()} Login")
         if role_label == "patient":
-            # Full name only (no password)
+            
             full_name = self.get_input("Your Full Name: ", 2)
-            user = get_user(full_name)  # stored as username for patients
+#This will store patient's full name as their username
+            user = get_user(full_name) 
             if not user or user.get("role") != "patient":
                 print("Invalid patient full name.")
                 return None
-            pid = get_patient_id_for_user(user["username"])
+
+            pid = get_patient_id_for_user(user["username"])#this will getpatient ID linked to the user's name
             if not pid:
                 print("No patient record linked to this account yet.")
                 return None
@@ -120,6 +128,7 @@ class MediTrackerApp:
         while True:
             self.clear_screen()
             print_header(f"Doctor Panel - Dr. {user['name']} ({user.get('org','')})")
+#This is the menu options displayed with colors
             print(Fore.LIGHTBLUE_EX+"1." +Style.RESET_ALL +"Add Patient (auto-creates patient login via full name)")
             print(Fore.LIGHTBLUE_EX+"2." +Style.RESET_ALL + " View/Edit Patient's Medicine")
             print(Fore.LIGHTBLUE_EX+"3." +Style.RESET_ALL + " Delete Patient (finished dose)")
