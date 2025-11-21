@@ -6,7 +6,7 @@ DATA_DIR = Path(__file__).resolve().parents[2] / "data"
 MED_FILE = DATA_DIR / "medicines.json"
 
 
-# Creation of JSONStorageBase class that serves as a parent class to the rest of child classes and that will contain storage details
+# Creation of JSONStorageBase class that serves as a parent class to the rest of the child classes and that will contain storage details
 class JSONStorageBase:
     # Base class to encapsulate JSON file storage responsibilities.
     # Provides ensure / load / save methods used by subclasses.
