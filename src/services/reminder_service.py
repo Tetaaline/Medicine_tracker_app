@@ -5,7 +5,8 @@ from pathlib import Path
 DATA_DIR = Path(__file__).resolve().parents[2] / "data"
 SCH_FILE = DATA_DIR / "schedules.json"
 
-
+# Created JSONStorageBase parent class that will contain child classes containing data with details about how the doctor will give the patient reminders and how the patient will access them.
+# Other classes can inherit from this so we don't repeat storage logic everywhere
 class JSONStorageBase:
     def __init__(self, file_path: Path, default_structure):
         self.file_path = Path(file_path)
@@ -25,12 +26,12 @@ class JSONStorageBase:
         with open(self.file_path, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=2)
 
-
+# Creates ScheduleManager child class for JSONStorageBase that give details on how the doctor will regulate schedules
 class ScheduleManager(JSONStorageBase):
     def __init__(self, file_path: Path):
         super().__init__(file_path, {"schedules": []})
 
-    # file helpers (preserve original names via module-level wrappers)
+    # These helper methods keep the original function-based names intact  
     def _ensure(self):
         return self.ensure()
 
@@ -40,7 +41,7 @@ class ScheduleManager(JSONStorageBase):
     def _save(self, data):
         return self.save(data)
 
-    # core API (preserve original logic)
+# Core reminder operations    
     def add_reminder(self, patient_id, medicine_name, dosage, time_hms, days, created_by):
         data = self._load()
         data["schedules"].append({
