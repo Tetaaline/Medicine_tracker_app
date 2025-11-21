@@ -89,11 +89,7 @@ class PatientRepository:
                 return p.get("id")
         pid = self.add_patient(doctor_username, patient_name)
         return pid
-    """
-        Removes a patient and also clean up anything linked to that patient:
-        - medicines assigned to them
-        - schedule reminders
-    """
+
 
     def delete_patient(self, doctor_username, patient_id):
         pat = self._load(self.pat_store)
