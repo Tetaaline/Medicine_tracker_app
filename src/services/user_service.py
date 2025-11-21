@@ -74,10 +74,10 @@ class UserRepository(FileRepoBase):
         return results
 
 
-#Thos will create one shared UserRepository that the functions below will use
+#This will create one shared UserRepository that the functions below will use
 _repo = UserRepository(USERS_FILE)
 
-
+#This will cover functions so that other files may use it easily
 def save_user(username, password, name, email, role, org=""):
     return _repo.save_user(username, password, name, email, role, org)
 
