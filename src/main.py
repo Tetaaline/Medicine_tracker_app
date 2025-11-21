@@ -3,7 +3,11 @@
 import os
 import threading
 from colorama import init, Fore, Back, Style
+
+#This is really to integrate or initialize colorama so that it can work properly on all systems 
 init(autoreset=True)
+
+#Thi will import UI display  functions and input validators
 from interface.menu import print_header
 from interface.validators import (
     is_letters_only, is_alnum_username, is_valid_dosage,
@@ -17,11 +21,13 @@ from services.patient_service import (
 from services.inventory_service import list_medicines, add_medicine, edit_medicine, delete_medicine, search_medicines
 from services.reminder_service import add_reminder, list_reminders, edit_reminder, patient_notification_daemon
 
+
 ADMIN_USER = "admin"
 ADMIN_PASS = "admin123"
 
 class MediTrackerApp:
     def __init__(self):
+#This will track which type of user is currently logged in if its either (doctor/patient/none) 
         self.CURRENT_ROLE = "neutral"
 
     def clear_screen(self):
@@ -60,7 +66,7 @@ class MediTrackerApp:
         org = self.get_input("Organization name: ", 2)
         pwd = self.get_input("Create password (min 8 chars): ", 8)
         save_user(username, pwd, username, email, role="doctor", org=org)
-        print(f"\nWelcome Dr. {username}! Account created successfully.")
+        print(f"\nWelcome Dr. {username}! Account created successfully.") 
         return {"username": username, "name": username, "role":"doctor", "org": org}
 
     def login_flow(self, role_label):
