@@ -12,7 +12,7 @@ def is_alnum_username(text: str) -> bool:
 #Checks if the dosage is in (value mg,g or l) format
 def is_valid_dosage(text: str) -> bool:
     return bool(re.fullmatch(r"\d+(\.\d+)?\s?(mg|g|l)", text, flags=re.IGNORECASE))
-
+#The function that validates time is in HH:MM:SS format
 def is_valid_time_hms(text: str) -> bool:
     try:
         datetime.strptime(text, "%H:%M:%S")
