@@ -1,3 +1,4 @@
+#Importing colorama for colored output in the terminal
 from colorama import Fore, Style
 
 def print_header(title):
