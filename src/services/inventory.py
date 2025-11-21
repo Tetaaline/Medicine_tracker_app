@@ -6,11 +6,11 @@ DATA_DIR = Path(__file__).resolve().parents[2] / "data"
 MED_FILE = DATA_DIR / "medicines.json"
 
 
+# Creation of JSONStorageBase class that serves as a parent class to the rest of child classes and that will contain storage details
 class JSONStorageBase:
-    """
-    Base class to encapsulate JSON file storage responsibilities.
-    Provides ensure / load / save methods used by subclasses.
-    """
+    # Base class to encapsulate JSON file storage responsibilities.
+    # Provides ensure / load / save methods used by subclasses.
+    
     def __init__(self, file_path: Path, root_key: str, default_structure=None):
         self.file_path = Path(file_path)
         self.root_key = root_key
@@ -32,21 +32,21 @@ class JSONStorageBase:
 
 
 class MedicineInventory(JSONStorageBase):
-    """
-    Medicine-specific storage logic. Inherits file operations from JSONStorageBase
-    and exposes the same behavior/logic as the original procedural module.
-    """
+    
+    # Medicine-specific storage logic. Inherits file operations from JSONStorageBase\ 
+    # and exposes the same behavior/logic as the original procedural module.
+   
     def __init__(self, file_path: Path):
         super().__init__(file_path, "medicines", {"medicines": []})
-
+# method that lists patient's medicine and their id 
     def list_medicines(self, patient_id):
         data = self._load()
         return [m for m in data.get("medicines", []) if m.get("patient_id") == patient_id]
-
+# method to search medicine
     def search_medicines(self, patient_id, term):
         term = term.lower()
         return [m for m in self.list_medicines(patient_id) if term in m.get("name", "").lower()]
-
+#Added method to add medine
     def add_medicine(self, patient_id, name, dosage, quantity, expiry_date, added_by):
         data = self._load()
         data["medicines"].append({
@@ -59,7 +59,7 @@ class MedicineInventory(JSONStorageBase):
             "added_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         })
         self._save(data)
-
+#Added a method that will enable the doctor to edit patient's medicine specifically adjusting the name, dosage, quantity, and expiry date
     def edit_medicine(self, patient_id, index, name, dosage, quantity, expiry_date):
         data = self._load()
         meds = [m for m in data.get("medicines", []) if m.get("patient_id") == patient_id]
@@ -75,7 +75,7 @@ class MedicineInventory(JSONStorageBase):
             self._save(data)
             return True
         return False
-
+# I added a method that allows doctor to delete medicine especially when the patient has recovered and is not under doctor's surper
     def delete_medicine(self, patient_id, index):
         data = self._load()
         meds = [m for m in data.get("medicines", []) if m.get("patient_id") == patient_id]
@@ -88,14 +88,14 @@ class MedicineInventory(JSONStorageBase):
         return False
 
 
-# Instantiate a module-level inventory object to preserve original function-style API.
+# Backward-compatibility wrappers that forward previous function calls before applying OOP organization style
 _inventory = MedicineInventory(MED_FILE)
 
 
 # Module-level functions to keep backward compatibility with the rest of the codebase.
 def _ensure():
     return _inventory._ensure()
-
+# These functions keep the former project code running by redirecting
 
 def _load():
     return _inventory._load()
