@@ -19,7 +19,7 @@ def is_valid_time_hms(text: str) -> bool:
         return bool(re.fullmatch(r"\d{2}:\d{2}:\d{2}", text))
     except ValueError:
         return False
-
+# Function to verify if the days entered is in VALID_DAYS List
 def normalize_days(days_list):
     out = []
     for d in days_list:
