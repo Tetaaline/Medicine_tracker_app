@@ -1,11 +1,13 @@
 # Medicine_tracker_app- Smart Medicine Reminder & Patient Management System
+---
 A Python-based application that allows doctors to manage patients, assign  medicines, and automate medication reminders. Patients can log in using their full name and receive real-time notifications. Built using Object-Oriented Programming (OOP) and JSON-based storage.
+
 ---
 ## 1. Project Title
 **MediTracker – Smart Medicine Reminder System**
-
-A lightweight Python application that empowers doctors to easily manage patient prescriptions and enables patients to receive automated medication reminders.
 ---
+A Python application that empowers doctors to easily manage patient prescriptions and enables patients to receive automated medication reminders.
+
 ## 2. Project Description
 
 MediTracker was created to solve a real-world issue:  
@@ -15,9 +17,10 @@ Our solution provides:
 - A simple and user-friendly doctor–patient management flow  
 - Automatic reminder notifications  
 - A clean and maintainable OOP code structure  
-- Easy JSON storage databases  
+- Easy JSON storage databases
+---
 **Why these technologies?**
-- **Python**: Beginner friendly, powerful, and ideal for a terminal-based system.  
+- **Python**: Beginner-friendly, powerful, and ideal for a terminal-based system.  
 - **OOP**: Required for PLP 2 and ensures scalability and maintainability.  
 - **JSON storage**: Lightweight and perfect for small projects.  
 - **Colorama**: Enhances the terminal interface, making the DEMO attractive.
@@ -48,10 +51,10 @@ Follow these steps to clone and run the project on your local machine.
 git clone githttps://github.com/Tetaaline/Medicine_tracker_app.git
 cd <Medicine_tracker_app>
 
-### **Step 2 — Install the requires package**
+### **Step 2 — Install the required package**
 <!-- ``` cmd terminal -->
 pip install colorama
-### **Step 3 — CNavigate to the src Folder **
+### **Step 3 — Navigate to the src Folder **
 cd src
 
 ### **Step 4 — Confirm the project structure**
@@ -69,7 +72,7 @@ If the data files don’t exist, the program automatically creates them.
 
 ### **Step 5 — Accessing JSON database on Linux/Ubuntu Terminal**
 Navigate to the src Folder
-Because this project uses JSON files as the database (instead of MySQL or PostgreSQL), there is no server to start. All data is stored locally inside the project folder in:
+Since this project utilizes JSON files as its database (as opposed to MySQL or PostgreSQL), there is no server to start. All data is stored locally inside the project folder in:
 /data/
    ├── users.txt
    ├── patients.json
@@ -78,7 +81,7 @@ Because this project uses JSON files as the database (instead of MySQL or Postgr
 These files are automatically created by the program the first time you run it.
 
 Below are the simple Linux/Ubuntu commands to view, edit, and inspect your JSON database.
-Steps to access json database: 
+Steps to access JSON database: 
 - Navigate to the project directory
     cd medicine-tracker-app
 -  Navigate into the data folder
@@ -106,7 +109,7 @@ ls -l
 
 ### **Step 4 — Run the application**
 
-From src directory run:
+From the src directory, run:
 python main.py
 ---
 ## How to Use the Project
