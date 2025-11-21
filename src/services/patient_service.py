@@ -1,32 +1,39 @@
 import json
 from datetime import datetime
 from pathlib import Path
-
+# Paths to the JSON files used as our lightweight “database”
 DATA_DIR = Path(__file__).resolve().parents[2] / "data"
 PAT_FILE = DATA_DIR / "patients.json"
 MED_FILE = DATA_DIR / "medicines.json"
 SCH_FILE = DATA_DIR / "schedules.json"
 
+# Created JSONBased parent class  and other classes can inherit from this so we don't repeat storage logic everywhere
 
 class JSONStorageBase:
     def __init__(self, file_path: Path, default_structure):
         self.file_path = Path(file_path)
         self.default_structure = default_structure
-
+# def ensure method make sure the JSON file exists. If it's missing, we create it with an empty structure
     def ensure(self):
         self.file_path.parent.mkdir(parents=True, exist_ok=True)
         if not self.file_path.exists():
             self.file_path.write_text(json.dumps(self.default_structure, indent=2))
-
+#def load method read and return the current JSON content
     def load(self):
         self.ensure()
         with open(self.file_path, "r", encoding="utf-8") as f:
             return json.load(f)
-
+# def save method writes updated data back to the JSON file
     def save(self, data):
         with open(self.file_path, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=2)
 
+#Created PatientRepository child class for JSONStorageBase that give details about patients information"
+"""
+ It handles all patient-related operations, plus cleanup of
+    related medicines and schedules when a patient is deleted.
+    Everything here acts like a tiny in-house database layer.
+"""
 
 class PatientRepository:
     def __init__(self, pat_fp: Path, med_fp: Path, sch_fp: Path):
@@ -66,17 +73,28 @@ class PatientRepository:
         })
         self._save(self.pat_store, data)
         return new_id
-
+    """
+        Only add a patient if they don’t already exist.
+        This avoids duplicates when a patient logs in with the same name/username.
+    """
     def add_patient_if_absent(self, doctor_username, patient_name, patient_username=""):
         data = self._load(self.pat_store)
+        # If linked to an existing user, return that patient’s ID
+
         for p in data.get("patients", []):
             if patient_username and p.get("user_username") == patient_username:
                 return p.get("id")
+            # If same doctor already added this patient manually
         for p in data.get("patients", []):
             if p.get("doctor") == doctor_username and p.get("name") == patient_name:
                 return p.get("id")
         pid = self.add_patient(doctor_username, patient_name)
         return pid
+    """
+        Removes a patient and also clean up anything linked to that patient:
+        - medicines assigned to them
+        - schedule reminders
+    """
 
     def delete_patient(self, doctor_username, patient_id):
         pat = self._load(self.pat_store)
@@ -182,7 +200,7 @@ def get_patient_by_id(pid):
 def link_patient_user(pid, username):
     return _repo.link_patient_user(pid, username)
 
-# Additng get_patient_id_for_user method
+# Adding get_patient_id_for_user method
 def get_patient_id_for_user(username):
     return _repo.get_patient_id_for_user(username)
 
