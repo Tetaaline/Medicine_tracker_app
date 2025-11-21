@@ -5,8 +5,7 @@ from pathlib import Path
 DATA_DIR = Path(__file__).resolve().parents[2] / "data"
 SCH_FILE = DATA_DIR / "schedules.json"
 
-# Created JSONStorageBase parent class that will contain child classes containing data with details about how the doctor will give the patient reminders and how the patient will access them.
-# Other classes can inherit from this so we don't repeat storage logic everywhere
+
 class JSONStorageBase:
     def __init__(self, file_path: Path, default_structure):
         self.file_path = Path(file_path)
