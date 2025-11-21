@@ -1,0 +1,26 @@
+
+#Displaying data added by the doctor about patient detail 
+{
+  "medicines": [
+    {
+      "patient_id": "P1763551317",
+      "name": "Paracet",
+      "dosage": "300mg",
+      "quantity": "10",
+      "expiry_date": "2026-01-01",
+      "added_by": "honnete",
+      "added_at": "2025-11-19 13:28:46"
+    },
+
+#Doctor added detail about second patient 
+    {
+      "patient_id": "P1763551352",
+      "name": "Doliprame",
+      "dosage": "400mg",
+      "quantity": "12",
+      "expiry_date": "2026/05/05",
+      "added_by": "honnete",
+      "added_at": "2025-11-19 19:42:18"
+    }
+  ]
+}
